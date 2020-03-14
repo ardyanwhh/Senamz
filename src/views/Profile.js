@@ -7,6 +7,7 @@ import {
   AsyncStorage,
   Alert,
   Platform,
+  Switch,
 } from 'react-native';
 import {useDarkMode} from 'react-native-dark-mode';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,10 +15,17 @@ import firebase from 'firebase';
 import profileStyle from '../assets/css/profileStyle';
 
 export default Profile = ({navigation}) => {
-  const isDarkMode = useDarkMode();
+  let isDarkMode = useDarkMode();
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
+
+  const _getAndroidDarkMode = async () => {
+    Platform.OS === 'android'
+      ? (isDarkMode = darkMode)
+      : false;
+  };
 
   const _handleLogout = async () => {
     Alert.alert('Peringatan', 'Ingin tetap keluar?', [
@@ -56,8 +64,18 @@ export default Profile = ({navigation}) => {
     await navigation.navigate('AboutUs');
   };
 
+  const _darkModeSwitcher = async () => {
+    if (Platform.OS === "android") {(
+      <Switch
+        onValueChange={() => setDarkMode(true)}
+        value={darkMode}
+      />
+    )}
+  };
+
   useEffect(() => {
     _getUser();
+    _getAndroidDarkMode();
   });
 
   return (
@@ -93,6 +111,7 @@ export default Profile = ({navigation}) => {
           <Text style={profileStyle.logoutButtonText}>Keluar</Text>
         </TouchableOpacity>
       </View>
+      {_darkModeSwitcher()}
       <View style={profileStyle.tentangKamiContainer}>
         <Text style={profileStyle.tentangKamiText} onPress={() => _toAboutUs()}>
           Tentang Kami

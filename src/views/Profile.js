@@ -21,11 +21,7 @@ export default Profile = ({navigation}) => {
   const [name, setName] = useState('');
   const [darkMode, setDarkMode] = useState(false);
 
-  const _getAndroidDarkMode = async () => {
-    Platform.OS === 'android'
-      ? (isDarkMode = darkMode)
-      : false;
-  };
+  Platform.OS === 'android' ? (isDarkMode = darkMode) : false;
 
   const _handleLogout = async () => {
     Alert.alert('Peringatan', 'Ingin tetap keluar?', [
@@ -64,19 +60,18 @@ export default Profile = ({navigation}) => {
     await navigation.navigate('AboutUs');
   };
 
-  const _darkModeSwitcher = async () => {
-    if (Platform.OS === "android") {(
-      <Switch
-        onValueChange={() => setDarkMode(true)}
-        value={darkMode}
-      />
-    )}
-  };
-
   useEffect(() => {
     _getUser();
-    _getAndroidDarkMode();
-  });
+
+    return () => {
+      func = async () => {
+        !darkMode
+          ? await AsyncStorage.setItem('darkMode', '')
+          : await AsyncStorage.setItem('darkMode', toString(darkMode));
+      };
+      func();
+    };
+  }, [darkMode]);
 
   return (
     <View
@@ -111,7 +106,9 @@ export default Profile = ({navigation}) => {
           <Text style={profileStyle.logoutButtonText}>Keluar</Text>
         </TouchableOpacity>
       </View>
-      {_darkModeSwitcher()}
+      <View>
+        <Switch onValueChange={() => setDarkMode(!darkMode)} value={darkMode}/>
+      </View>
       <View style={profileStyle.tentangKamiContainer}>
         <Text style={profileStyle.tentangKamiText} onPress={() => _toAboutUs()}>
           Tentang Kami

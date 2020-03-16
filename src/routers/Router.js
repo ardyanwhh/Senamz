@@ -1,5 +1,5 @@
 import React from 'react';
-import {AsyncStorage, Platform, TouchableOpacity} from 'react-native';
+import {AsyncStorage, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -21,15 +21,31 @@ export default Router = () => {
   const isDarkMode = useDarkMode();
 
   const headerStyleConsume = {
-    background: isDarkMode ? headerStyle.onDark : headerStyle.onLight,
-    title: isDarkMode
-      ? headerStyle.onDarkBackground
-      : headerStyle.onLightBackground,
+    background: 
+      Platform.OS !== 'android'
+        ? isDarkMode ? headerStyle.onDark : headerStyle.onLight
+        : headerStyle.android,
+    title: 
+      Platform.OS !== 'android'
+        ? isDarkMode 
+          ? headerStyle.onDarkBackground 
+          : headerStyle.onLightBackground
+        : headerStyle.onDarkBackground
   };
 
   const footerStyleConsume = {
-    icon: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
-    background: isDarkMode ? footerStyle.onDark : footerStyle.onLight,
+    icon: 
+      Platform.OS !== 'android'  
+        ? isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)'
+        : 'rgba(255,255,255,0.5)',
+    activeIcon: 
+      Platform.OS !== 'android'
+        ? 'tomato'
+        : 'white',
+    background: 
+      Platform.OS !== 'android'
+        ? isDarkMode ? footerStyle.onDark : footerStyle.onLight
+        : footerStyle.android
   };
 
   const HomeStack = () => (
@@ -87,7 +103,7 @@ export default Router = () => {
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: 'tomato',
+        activeTintColor: footerStyleConsume.activeIcon,
         inactiveTintColor: footerStyleConsume.icon,
         style: footerStyleConsume.background,
       }}

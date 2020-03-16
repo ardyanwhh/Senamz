@@ -18,7 +18,17 @@ import firebase from 'firebase';
 import loginStyle from '../assets/css/loginStyle';
 
 export default Login = ({navigation}) => {
-  const isDarkMode = useDarkMode();
+  let isDarkMode = useDarkMode();
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const _setDarkMode = async () => {
+    setDarkMode(Boolean(await AsyncStorage.getItem('darkMode')))
+  };
+
+  _setDarkMode();
+
+  Platform.OS !== 'android' ? (isDarkMode = darkMode) : false;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

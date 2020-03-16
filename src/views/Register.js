@@ -21,9 +21,15 @@ import registerStyle from '../assets/css/registerStyle';
 export default Register = ({navigation}) => {
   let isDarkMode = useDarkMode();
 
-  const _setDarkModeOnAndroid = async () => {
-    isDarkMode = await AsyncStorage.getItem('darkMode');
+  const [darkMode, setDarkMode] = useState(false);
+
+  const _setDarkMode = async () => {
+    setDarkMode(Boolean(await AsyncStorage.getItem('darkMode')))
   };
+
+  _setDarkMode();
+
+  Platform.OS !== 'android' ? (isDarkMode = darkMode) : false;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -57,12 +63,6 @@ export default Register = ({navigation}) => {
   const _toLogin = async () => {
     await navigation.navigate('Login');
   };
-
-  useEffect(() => {
-    Platform.OS === "android"
-    ? _setDarkModeOnAndroid()
-    : false
-  });
 
   return (
     <TouchableWithoutFeedback

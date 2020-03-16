@@ -7,4 +7,7 @@ export default StyleSheet.create({
   onDark: {
     backgroundColor: 'rgba(0,0,0,0.9)',
   },
+  android: {
+    backgroundColor: 'tomato'
+  }
 });

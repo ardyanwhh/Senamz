@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,17 @@ import {useDarkMode} from 'react-native-dark-mode';
 import homeStyle from '../assets/css/homeStyle';
 
 export default Home = ({navigation}) => {
-  const isDarkMode = useDarkMode();
+  let isDarkMode = useDarkMode();
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const _setDarkMode = async () => {
+    setDarkMode(Boolean(await AsyncStorage.getItem('darkMode')))
+  };
+
+  _setDarkMode();
+
+  Platform.OS === 'android' ? (isDarkMode = darkMode) : false;
 
   return (
     <View style={isDarkMode ? homeStyle.containerDark : homeStyle.container}>

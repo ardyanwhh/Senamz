@@ -13,4 +13,7 @@ export default StyleSheet.create({
   onLight: {
     backgroundColor: 'rgba(255,255,255,0.9)',
   },
+  android: {
+    backgroundColor: 'tomato'
+  }
 });

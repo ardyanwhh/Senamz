@@ -40,7 +40,7 @@ export default Router = () => {
         : 'rgba(255,255,255,0.5)',
     activeIcon: 
       Platform.OS !== 'android'
-        ? 'tomato'
+        ? 'rgba(230,71,74,1)'
         : 'white',
     background: 
       Platform.OS !== 'android'

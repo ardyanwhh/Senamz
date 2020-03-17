@@ -37,7 +37,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   logoText: {
-    color: 'tomato',
+    color: 'rgba(230,71,74,1)',
     fontWeight: 'bold',
     fontSize: square / 11,
   },
@@ -50,7 +50,7 @@ export default StyleSheet.create({
   },
   input: {
     borderWidth: 1.5,
-    borderColor: 'tomato',
+    borderColor: 'rgba(230,71,74,1)',
     borderRadius: square / 37.1,
     paddingLeft: square / 37.1,
     height: square / 6.3,
@@ -59,7 +59,7 @@ export default StyleSheet.create({
   },
   inputDark: {
     borderWidth: 1.5,
-    borderColor: 'tomato',
+    borderColor: 'rgba(230,71,74,1)',
     borderRadius: square / 37.1,
     paddingLeft: square / 37.1,
     height: square / 6.3,
@@ -72,7 +72,7 @@ export default StyleSheet.create({
     paddingBottom: square / 64.2,
   },
   masukButton: {
-    backgroundColor: 'tomato',
+    backgroundColor: 'rgba(230,71,74,1)',
     borderRadius: square / 37.1,
     height: square / 7,
     justifyContent: 'center',
@@ -101,6 +101,6 @@ export default StyleSheet.create({
   },
   toLoginText: {
     fontSize: square / 20,
-    color: 'tomato',
+    color: 'rgba(230,71,74,1)',
   },
 });

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, forwardRef} from 'react';
 import {
   SafeAreaView,
   View,
@@ -68,7 +68,6 @@ export default Login = ({navigation}) => {
               }
               onChangeText={email => setEmail(email)}
               value={email}
-              onSubmitEditing={() => _handleLogin()}
             />
           </View>
           <View style={loginStyle.inputContainer}>

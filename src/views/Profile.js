@@ -9,13 +9,14 @@ import {
   Platform,
   Switch,
 } from 'react-native';
-import {useDarkMode} from 'react-native-dark-mode';
 import firebase from 'firebase';
+import { useDarkMode } from 'react-native-dark-mode';
 import profileStyle from '../assets/css/profileStyle';
+import DarkModeSwitch from '../components/DarkModeSwitch';
 
 export default Profile = ({navigation}) => {
-  let isDarkMode = useDarkMode();
-
+  const isDarkMode = useDarkMode();
+  
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
 
@@ -93,8 +94,6 @@ export default Profile = ({navigation}) => {
           onPress={() => _handleLogout()}>
           <Text style={profileStyle.logoutButtonText}>Keluar</Text>
         </TouchableOpacity>
-      </View>
-      <View>
       </View>
       <View style={profileStyle.tentangKamiContainer}>
         <Text

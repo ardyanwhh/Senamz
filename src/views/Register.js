@@ -36,9 +36,10 @@ export default Register = ({navigation}) => {
         firebase
           .database()
           .ref()
-          .child(`users/${username}`)
+          .child(`users/${username[0]}`)
           .set({
             name: name,
+            username: username[0]
           })
           .then(async () => {
             await navigation.navigate('Login');

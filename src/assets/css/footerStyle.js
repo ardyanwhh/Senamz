@@ -8,6 +8,6 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.9)',
   },
   android: {
-    backgroundColor: 'tomato'
+    backgroundColor: 'rgba(230,71,74,1)'
   }
 });

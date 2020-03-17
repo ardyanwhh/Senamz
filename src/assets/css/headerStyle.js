@@ -14,6 +14,6 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.9)',
   },
   android: {
-    backgroundColor: 'tomato'
+    backgroundColor: 'rgba(230,71,74,1)'
   }
 });

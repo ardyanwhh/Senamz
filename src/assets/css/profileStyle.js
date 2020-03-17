@@ -65,7 +65,7 @@ export default StyleSheet.create({
     width: screenWidth,
   },
   tentangKamiText: {
-    color: 'tomato'
+    color: 'rgba(230,71,74,1)'
   },
   logoutButtonContainer: {
     alignItems: 'center',
@@ -73,7 +73,7 @@ export default StyleSheet.create({
   logoutButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'tomato',
+    backgroundColor: 'rgba(230,71,74,1)',
     width: square / 1.9,
     height: square / 7,
     borderRadius: square / 37.1,

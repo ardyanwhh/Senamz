@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -13,15 +13,14 @@ import homeStyle from '../assets/css/homeStyle';
 export default Home = ({navigation}) => {
   let isDarkMode = useDarkMode();
 
-  const [darkMode, setDarkMode] = useState(false);
-
-  const _setDarkMode = async () => {
-    setDarkMode(Boolean(await AsyncStorage.getItem('darkMode')))
+  const _ifUserNotExist = async () => {
+    const user = await AsyncStorage.getItem('email');
+    !user ? navigation.navigate('Login') : false;
   };
 
-  _setDarkMode();
-
-  Platform.OS === 'android' ? (isDarkMode = darkMode) : false;
+  useEffect(() => {
+    _ifUserNotExist();
+  });
 
   return (
     <View style={isDarkMode ? homeStyle.containerDark : homeStyle.container}>

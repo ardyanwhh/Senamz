@@ -20,16 +20,6 @@ import loginStyle from '../assets/css/loginStyle';
 export default Login = ({navigation}) => {
   let isDarkMode = useDarkMode();
 
-  const [darkMode, setDarkMode] = useState(false);
-
-  const _setDarkMode = async () => {
-    setDarkMode(Boolean(await AsyncStorage.getItem('darkMode')))
-  };
-
-  _setDarkMode();
-
-  Platform.OS !== 'android' ? (isDarkMode = darkMode) : false;
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -46,18 +36,9 @@ export default Login = ({navigation}) => {
       });
   };
 
-  const _ifUserExist = async () => {
-    const user = await AsyncStorage.getItem('email');
-    user ? navigation.navigate('Main') : false;
-  };
-
   const _toRegister = async () => {
     await navigation.navigate('Register');
   };
-
-  useEffect(() => {
-    _ifUserExist();
-  });
 
   return (
     <TouchableWithoutFeedback

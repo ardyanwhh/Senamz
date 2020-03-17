@@ -10,7 +10,6 @@ import {
   Switch,
 } from 'react-native';
 import {useDarkMode} from 'react-native-dark-mode';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import firebase from 'firebase';
 import profileStyle from '../assets/css/profileStyle';
 
@@ -19,9 +18,6 @@ export default Profile = ({navigation}) => {
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
-
-  Platform.OS === 'android' ? (isDarkMode = darkMode) : false;
 
   const _handleLogout = async () => {
     Alert.alert('Peringatan', 'Ingin tetap keluar?', [
@@ -45,7 +41,6 @@ export default Profile = ({navigation}) => {
 
   const _getUser = async () => {
     setEmail(await AsyncStorage.getItem('email'));
-
     const username = email.split('@');
 
     firebase
@@ -62,20 +57,13 @@ export default Profile = ({navigation}) => {
 
   useEffect(() => {
     _getUser();
-
-    return () => {
-      func = async () => {
-        !darkMode
-          ? await AsyncStorage.setItem('darkMode', '')
-          : await AsyncStorage.setItem('darkMode', toString(darkMode));
-      };
-      func();
-    };
-  }, [darkMode]);
+  });
 
   return (
     <View
-      style={isDarkMode ? profileStyle.containerDark : profileStyle.container}>
+      style={
+        isDarkMode ? profileStyle.containerDark : profileStyle.container
+      }>
       <View style={profileStyle.imageContainer}>
         <Image
           style={profileStyle.image}
@@ -107,10 +95,11 @@ export default Profile = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View>
-        <Switch onValueChange={() => setDarkMode(!darkMode)} value={darkMode}/>
       </View>
       <View style={profileStyle.tentangKamiContainer}>
-        <Text style={profileStyle.tentangKamiText} onPress={() => _toAboutUs()}>
+        <Text
+          style={profileStyle.tentangKamiText}
+          onPress={() => _toAboutUs()}>
           Tentang Kami
         </Text>
       </View>

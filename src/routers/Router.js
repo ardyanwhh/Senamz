@@ -1,5 +1,4 @@
 import React from 'react';
-import {AsyncStorage, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -13,6 +12,13 @@ import footerStyle from '../assets/css/footerStyle';
 import Profile from '../views/Profile';
 import Quiz from '../views/Quiz';
 import AboutUs from '../views/AboutUs';
+import Latihan from '../views/Latihan';
+import Ardyan from '../views/Ardyan';
+import Airlangga from '../views/Airlangga';
+import Ana from '../views/Ana';
+import Alanzahir from '../views/Alanzahir';
+import Awalisyah from '../views/Awalisyah';
+import Finish from '../views/Finish';
 
 export default Router = () => {
   const Stack = createStackNavigator();
@@ -21,31 +27,16 @@ export default Router = () => {
   const isDarkMode = useDarkMode();
 
   const headerStyleConsume = {
-    background: 
-      Platform.OS !== 'android'
-        ? isDarkMode ? headerStyle.onDark : headerStyle.onLight
-        : headerStyle.android,
-    title: 
-      Platform.OS !== 'android'
-        ? isDarkMode 
-          ? headerStyle.onDarkBackground 
-          : headerStyle.onLightBackground
-        : headerStyle.onDarkBackground
+    background: isDarkMode ? headerStyle.onDark : headerStyle.onLight,
+    title: isDarkMode
+      ? headerStyle.onDarkBackground
+      : headerStyle.onLightBackground,
   };
 
   const footerStyleConsume = {
-    icon: 
-      Platform.OS !== 'android'  
-        ? isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)'
-        : 'rgba(255,255,255,0.5)',
-    activeIcon: 
-      Platform.OS !== 'android'
-        ? 'rgba(230,71,74,1)'
-        : 'white',
-    background: 
-      Platform.OS !== 'android'
-        ? isDarkMode ? footerStyle.onDark : footerStyle.onLight
-        : footerStyle.android
+    icon: isDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
+    activeIcon: 'rgba(230,71,74,1)',
+    background: isDarkMode ? footerStyle.onDark : footerStyle.onLight,
   };
 
   const HomeStack = () => (
@@ -73,6 +64,33 @@ export default Router = () => {
           headerTitleStyle: headerStyleConsume.title,
         }}
       />
+      <Stack.Screen
+        name="Latihan"
+        component={Latihan}
+        options={{
+          headerTitle: `Latihan`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
+      <Stack.Screen
+        name="Finish"
+        component={Finish}
+        options={{
+          headerTitle: `Selesai`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
+      <Stack.Screen
+        name="Ujian"
+        component={Quiz}
+        options={{
+          headerTitle: `Ujian`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
     </Stack.Navigator>
   );
 
@@ -92,6 +110,51 @@ export default Router = () => {
         component={AboutUs}
         options={{
           headerTitle: `Tentang Kami`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
+      <Stack.Screen
+        name="Ardyan"
+        component={Ardyan}
+        options={{
+          headerTitle: `Ardyan`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
+      <Stack.Screen
+        name="Airlangga"
+        component={Airlangga}
+        options={{
+          headerTitle: `Airlangga`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
+      <Stack.Screen
+        name="Ana"
+        component={Ana}
+        options={{
+          headerTitle: `Ana`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
+      <Stack.Screen
+        name="Alanzahir"
+        component={Alanzahir}
+        options={{
+          headerTitle: `Alanzahir`,
+          headerStyle: headerStyleConsume.background,
+          headerTitleStyle: headerStyleConsume.title,
+        }}
+      />
+      <Stack.Screen
+        name="Awalisyah"
+        component={Awalisyah}
+        options={{
+          headerTitle: `Awalisyah`,
           headerStyle: headerStyleConsume.background,
           headerTitleStyle: headerStyleConsume.title,
         }}
@@ -122,25 +185,25 @@ export default Router = () => {
           return <Ionicons name={iconName} color={color} size={size} />;
         },
       })}>
-      <Tab.Screen 
-        name="Home" 
-        component={HomeStack} 
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
         options={{
-          tabBarLabel: 'Beranda'
+          tabBarLabel: 'Beranda',
         }}
       />
-      <Tab.Screen 
-        name="Quiz" 
-        component={QuizStack} 
+      <Tab.Screen
+        name="Quiz"
+        component={QuizStack}
         options={{
-          tabBarLabel: 'Kuis'
+          tabBarLabel: 'Kuis',
         }}
       />
-      <Tab.Screen 
-        name="Profile" 
-        component={ProfileStack} 
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStack}
         options={{
-          tabBarLabel: 'Profil'
+          tabBarLabel: 'Profil',
         }}
       />
     </Tab.Navigator>

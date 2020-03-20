@@ -5,20 +5,18 @@ import {
   Image,
   TouchableOpacity,
   AsyncStorage,
-  Alert,
-  Platform,
-  Switch,
+  Alert
 } from 'react-native';
 import firebase from 'firebase';
-import { useDarkMode } from 'react-native-dark-mode';
+import {useDarkMode} from 'react-native-dark-mode';
 import profileStyle from '../assets/css/profileStyle';
-import DarkModeSwitch from '../components/DarkModeSwitch';
 
 export default Profile = ({navigation}) => {
   const isDarkMode = useDarkMode();
-  
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [loading, loadingShown] = useState(true);
 
   const _handleLogout = async () => {
     Alert.alert('Peringatan', 'Ingin tetap keluar?', [
@@ -50,6 +48,10 @@ export default Profile = ({navigation}) => {
       .on('value', snap => {
         setName(snap.val());
       });
+
+    name != null
+      ? loadingShown(false)
+      : loadingShown(true)
   };
 
   const _toAboutUs = async () => {
@@ -61,46 +63,48 @@ export default Profile = ({navigation}) => {
   });
 
   return (
-    <View
-      style={
-        isDarkMode ? profileStyle.containerDark : profileStyle.container
-      }>
-      <View style={profileStyle.imageContainer}>
-        <Image
-          style={profileStyle.image}
-          source={require('../assets/img/profile.png')}
-        />
-      </View>
-      <View style={profileStyle.nameTextContainer}>
-        <Text
-          style={
-            isDarkMode ? profileStyle.nameTextDark : profileStyle.nameText
-          }>
-          {name}
-        </Text>
-      </View>
-      <View style={profileStyle.emailTextContainer}>
-        <Text
-          style={
-            isDarkMode ? profileStyle.emailTextDark : profileStyle.emailText
-          }>
-          {email}
-        </Text>
-      </View>
-      <View style={profileStyle.tentangKamiContainer}></View>
-      <View style={profileStyle.logoutButtonContainer}>
-        <TouchableOpacity
-          style={profileStyle.logoutButton}
-          onPress={() => _handleLogout()}>
-          <Text style={profileStyle.logoutButtonText}>Keluar</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={profileStyle.tentangKamiContainer}>
-        <Text
-          style={profileStyle.tentangKamiText}
-          onPress={() => _toAboutUs()}>
-          Tentang Kami
-        </Text>
+    <View>
+      <View
+        style={
+          isDarkMode ? profileStyle.containerDark : profileStyle.container
+        }>
+        <View style={profileStyle.imageContainer}>
+          <Image
+            style={profileStyle.image}
+            source={require('../assets/img/profile.png')}
+          />
+        </View>
+        <View style={profileStyle.nameTextContainer}>
+          <Text
+            style={
+              isDarkMode ? profileStyle.nameTextDark : profileStyle.nameText
+            }>
+            {name}
+          </Text>
+        </View>
+        <View style={profileStyle.emailTextContainer}>
+          <Text
+            style={
+              isDarkMode ? profileStyle.emailTextDark : profileStyle.emailText
+            }>
+            {email}
+          </Text>
+        </View>
+        <View style={profileStyle.tentangKamiContainer}></View>
+        <View style={profileStyle.logoutButtonContainer}>
+          <TouchableOpacity
+            style={profileStyle.logoutButton}
+            onPress={() => _handleLogout()}>
+            <Text style={profileStyle.logoutButtonText}>Keluar</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={profileStyle.tentangKamiContainer}>
+          <Text
+            style={profileStyle.tentangKamiText}
+            onPress={() => _toAboutUs()}>
+            Tentang Kami
+          </Text>
+        </View>
       </View>
     </View>
   );

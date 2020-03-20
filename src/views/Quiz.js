@@ -3,14 +3,15 @@ import {View, Text, TouchableOpacity, Image, AsyncStorage} from 'react-native';
 import {useDarkMode} from 'react-native-dark-mode';
 import quizStyle from '../assets/css/quizStyle';
 
-export default Quiz = () => {
+export default Quiz = ({navigation}) => {
   let isDarkMode = useDarkMode();
 
   return (
     <View style={isDarkMode ? quizStyle.containerDark : quizStyle.container}>
       <View style={quizStyle.buttonContainer}>
         <TouchableOpacity
-          style={isDarkMode ? quizStyle.buttonDark : quizStyle.button}>
+          style={isDarkMode ? quizStyle.buttonDark : quizStyle.button}
+        >
           <View style={quizStyle.buttonImageContainer}>
             <Image
               style={quizStyle.buttonImage}
@@ -27,7 +28,9 @@ export default Quiz = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          style={isDarkMode ? quizStyle.buttonDark : quizStyle.button}>
+          style={isDarkMode ? quizStyle.buttonDark : quizStyle.button}
+          onPress={() => navigation.navigate('Latihan')}
+        >
           <View style={quizStyle.buttonImageContainer}>
             <Image
               style={quizStyle.buttonImage}
